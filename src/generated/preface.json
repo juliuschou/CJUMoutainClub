@@ -1,0 +1,450 @@
+{
+  "title": "遊記總集 — 前言",
+  "teacherMessage": [
+    "回顧六年山中歲月與大家在一起，接近大自然、享受大自然所賜予的秀麗風光、怡人景緻，徜徉在綿延山巒、山川間，在叢林中追逐、享受綠草如茵，歡笑不斷以及走累了「轉彎」就到了，但是數不盡的「轉彎」，那種「被騙」的感覺真溫馨。是一段永難忘懷的時光。",
+    "長榮大學登山社校友會會刊創刊之際，由衷表示慶賀之餘，盼望藉由這份社刊的出版，能永續的維持你、我、他之間山誼，並融合在校社員相互砥礪，發揮登山者的精神、包容心，共同打拼，開創充滿新希望的人生。"
+  ],
+  "activities": [
+    {
+      "sequenceNumber": 0,
+      "rawDateLabel": "86年5月14日",
+      "year": 86,
+      "month": 5,
+      "location": "成立長榮登社校友會  及組織章程",
+      "attendees": null,
+      "note": null,
+      "isCancelled": false
+    },
+    {
+      "sequenceNumber": 1,
+      "rawDateLabel": "87年5月23~24日",
+      "year": 87,
+      "month": 5,
+      "location": "烏山",
+      "attendees": 14,
+      "note": "召開會員大會",
+      "isCancelled": false
+    },
+    {
+      "sequenceNumber": 2,
+      "rawDateLabel": "87年月~日",
+      "year": 87,
+      "month": null,
+      "location": "陽明山國家公園",
+      "attendees": null,
+      "note": null,
+      "isCancelled": false
+    },
+    {
+      "sequenceNumber": 3,
+      "rawDateLabel": "88年1月1~2日",
+      "year": 88,
+      "month": 1,
+      "location": "石洞溫泉",
+      "attendees": 17,
+      "note": "老師慶生活動",
+      "isCancelled": false
+    },
+    {
+      "sequenceNumber": 4,
+      "rawDateLabel": "88年7月10~11日",
+      "year": 88,
+      "month": 7,
+      "location": "八仙山",
+      "attendees": 14,
+      "note": "未登頂",
+      "isCancelled": false
+    },
+    {
+      "sequenceNumber": 5,
+      "rawDateLabel": "89年1月1~2日",
+      "year": 89,
+      "month": 1,
+      "location": "彰化縣全國大會師",
+      "attendees": 12,
+      "note": "社團會訊創刊發行、老師慶生活動",
+      "isCancelled": false
+    },
+    {
+      "sequenceNumber": 6,
+      "rawDateLabel": "89年4月22~23日",
+      "year": 89,
+      "month": 4,
+      "location": "桶盤山 & 烏來山",
+      "attendees": 8,
+      "note": null,
+      "isCancelled": false
+    },
+    {
+      "sequenceNumber": 7,
+      "rawDateLabel": "89年7月15日",
+      "year": 89,
+      "month": 7,
+      "location": "陽明山迎新",
+      "attendees": 12,
+      "note": "迎新活動",
+      "isCancelled": false
+    },
+    {
+      "sequenceNumber": 8,
+      "rawDateLabel": "89年9月23~24日",
+      "year": 89,
+      "month": 9,
+      "location": "加里山",
+      "attendees": 15,
+      "note": "第一、二屆正副會長交接典禮",
+      "isCancelled": false
+    },
+    {
+      "sequenceNumber": 9,
+      "rawDateLabel": "89年12月31日~ 90年1月1日",
+      "year": 89,
+      "month": 12,
+      "location": "瑞太古道 & 達娜依谷",
+      "attendees": 14,
+      "note": "老師慶生活動",
+      "isCancelled": false
+    },
+    {
+      "sequenceNumber": 10,
+      "rawDateLabel": "90年4月28~29日",
+      "year": 90,
+      "month": 4,
+      "location": "拔刀爾山、高腰山及美鹿山",
+      "attendees": 20,
+      "note": null,
+      "isCancelled": false
+    },
+    {
+      "sequenceNumber": 11,
+      "rawDateLabel": "90年7月14日",
+      "year": 90,
+      "month": 7,
+      "location": "魚路古道",
+      "attendees": 13,
+      "note": null,
+      "isCancelled": false
+    },
+    {
+      "sequenceNumber": 12,
+      "rawDateLabel": "90年7月28~29日",
+      "year": 90,
+      "month": 7,
+      "location": "大克山",
+      "attendees": 0,
+      "note": "因颱風取消",
+      "isCancelled": true
+    },
+    {
+      "sequenceNumber": 13,
+      "rawDateLabel": "90年10月13~14日",
+      "year": 90,
+      "month": 10,
+      "location": "頭嵙山",
+      "attendees": 9,
+      "note": "原訂小錦屏溯溪活動因風災頻傳，為防意外，行程改為攀登頭嵙山，並召開會員大會。",
+      "isCancelled": false
+    },
+    {
+      "sequenceNumber": 14,
+      "rawDateLabel": "90年10月27~28日",
+      "year": 90,
+      "month": 10,
+      "location": "台南鹿耳門",
+      "attendees": null,
+      "note": "支援中華健行登山會活動。",
+      "isCancelled": false
+    },
+    {
+      "sequenceNumber": 15,
+      "rawDateLabel": "90年12月22~23日",
+      "year": 90,
+      "month": 12,
+      "location": "清境農場",
+      "attendees": 8,
+      "note": null,
+      "isCancelled": false
+    },
+    {
+      "sequenceNumber": 16,
+      "rawDateLabel": "90年12月29~30日",
+      "year": 90,
+      "month": 12,
+      "location": "",
+      "attendees": 12,
+      "note": "老師慶生活動",
+      "isCancelled": false
+    },
+    {
+      "sequenceNumber": 17,
+      "rawDateLabel": "91年4月13~14日",
+      "year": 91,
+      "month": 4,
+      "location": "北插天山",
+      "attendees": 9,
+      "note": "未攻頂",
+      "isCancelled": false
+    },
+    {
+      "sequenceNumber": 18,
+      "rawDateLabel": "91年7月13~14日",
+      "year": 91,
+      "month": 7,
+      "location": "陽明山東西大縱走",
+      "attendees": 8,
+      "note": null,
+      "isCancelled": false
+    },
+    {
+      "sequenceNumber": 19,
+      "rawDateLabel": "91年10月26~27日",
+      "year": 91,
+      "month": 10,
+      "location": "稍來山-鳶嘴山縱走",
+      "attendees": 10,
+      "note": "召開會員大會暨正副會長改選",
+      "isCancelled": false
+    },
+    {
+      "sequenceNumber": 20,
+      "rawDateLabel": "91年12月28~29日",
+      "year": 91,
+      "month": 12,
+      "location": "奮起湖大凍山",
+      "attendees": 5,
+      "note": "老師慶生活動",
+      "isCancelled": false
+    },
+    {
+      "sequenceNumber": 21,
+      "rawDateLabel": "92年4月12~13日",
+      "year": 92,
+      "month": 4,
+      "location": "跑馬古道",
+      "attendees": 12,
+      "note": "第三、四屆正副會長交接典禮",
+      "isCancelled": false
+    },
+    {
+      "sequenceNumber": 22,
+      "rawDateLabel": "92年7月26~27日",
+      "year": 92,
+      "month": 7,
+      "location": "水社大山",
+      "attendees": 0,
+      "note": "因颱風取消",
+      "isCancelled": true
+    },
+    {
+      "sequenceNumber": 23,
+      "rawDateLabel": "92年9月27~28日",
+      "year": 92,
+      "month": 9,
+      "location": "馬拉邦山",
+      "attendees": 20,
+      "note": "召開會員大會",
+      "isCancelled": false
+    },
+    {
+      "sequenceNumber": 25,
+      "rawDateLabel": "92年12月27~28日",
+      "year": 92,
+      "month": 12,
+      "location": "關山越嶺古道",
+      "attendees": 7,
+      "note": "老師慶生活動",
+      "isCancelled": false
+    },
+    {
+      "sequenceNumber": 26,
+      "rawDateLabel": "93年3月13~14日",
+      "year": 93,
+      "month": 3,
+      "location": "東卯山",
+      "attendees": 15,
+      "note": null,
+      "isCancelled": false
+    },
+    {
+      "sequenceNumber": 27,
+      "rawDateLabel": "93年6月12~13日",
+      "year": 93,
+      "month": 6,
+      "location": "草嶺古道",
+      "attendees": 0,
+      "note": "報名人數過少改為秋季活動",
+      "isCancelled": true
+    },
+    {
+      "sequenceNumber": 28,
+      "rawDateLabel": "93年8月28~29日",
+      "year": 93,
+      "month": 8,
+      "location": "梅峰農場自然生態體驗營",
+      "attendees": 13,
+      "note": null,
+      "isCancelled": false
+    },
+    {
+      "sequenceNumber": 29,
+      "rawDateLabel": "93年10月9~10日",
+      "year": 93,
+      "month": 10,
+      "location": "草嶺古道",
+      "attendees": 11,
+      "note": "召開會員大會暨正副會長改選",
+      "isCancelled": false
+    },
+    {
+      "sequenceNumber": 30,
+      "rawDateLabel": "93年11月27~28日",
+      "year": 93,
+      "month": 11,
+      "location": "觀霧之旅",
+      "attendees": 0,
+      "note": "因颱風造成道路不通而取消",
+      "isCancelled": true
+    },
+    {
+      "sequenceNumber": 31,
+      "rawDateLabel": "94年1月 1~2日",
+      "year": 94,
+      "month": 1,
+      "location": "關山嶺山+石洞溫泉",
+      "attendees": 8,
+      "note": "老師慶生活動",
+      "isCancelled": false
+    },
+    {
+      "sequenceNumber": 32,
+      "rawDateLabel": "94年3月20日",
+      "year": 94,
+      "month": 3,
+      "location": "玉山開山儀式及活動",
+      "attendees": 4,
+      "note": "玉山國家公園管理處主辦",
+      "isCancelled": false
+    },
+    {
+      "sequenceNumber": 33,
+      "rawDateLabel": "94年3月26~27日",
+      "year": 94,
+      "month": 3,
+      "location": "北插天山",
+      "attendees": 11,
+      "note": "第四、五屆正副會長交接典禮",
+      "isCancelled": false
+    },
+    {
+      "sequenceNumber": 34,
+      "rawDateLabel": "94年4月23~24日",
+      "year": 94,
+      "month": 4,
+      "location": "東勢林場賞螢火蟲",
+      "attendees": 14,
+      "note": "額外活動",
+      "isCancelled": false
+    },
+    {
+      "sequenceNumber": 35,
+      "rawDateLabel": "94年5月21~22日",
+      "year": 94,
+      "month": 5,
+      "location": "學弟妹畢旅之清境合歡之旅",
+      "attendees": 6,
+      "note": "學弟妹主辦",
+      "isCancelled": false
+    },
+    {
+      "sequenceNumber": 36,
+      "rawDateLabel": "94年7月9日",
+      "year": 94,
+      "month": 7,
+      "location": "大雪山森林遊樂區之旅",
+      "attendees": 19,
+      "note": "迎新活動",
+      "isCancelled": false
+    },
+    {
+      "sequenceNumber": 37,
+      "rawDateLabel": "94年8月13~14日",
+      "year": 94,
+      "month": 8,
+      "location": "北埔五指山",
+      "attendees": 23,
+      "note": "召開會員大會",
+      "isCancelled": false
+    },
+    {
+      "sequenceNumber": 38,
+      "rawDateLabel": "94年10月8~10日",
+      "year": 94,
+      "month": 10,
+      "location": "雪山東主峰",
+      "attendees": 16,
+      "note": null,
+      "isCancelled": false
+    },
+    {
+      "sequenceNumber": 39,
+      "rawDateLabel": "94年12月31~ 95年1月1日",
+      "year": 94,
+      "month": 12,
+      "location": "台東太麻里之旅",
+      "attendees": 6,
+      "note": "老師慶生活動",
+      "isCancelled": false
+    },
+    {
+      "sequenceNumber": 40,
+      "rawDateLabel": "95年1月13~15日",
+      "year": 95,
+      "month": 1,
+      "location": "玉山淨山活動",
+      "attendees": 3,
+      "note": "玉山國家公園管理處主辦",
+      "isCancelled": false
+    },
+    {
+      "sequenceNumber": 41,
+      "rawDateLabel": "95年3月11~12日",
+      "year": 95,
+      "month": 3,
+      "location": "溪頭杉林溪步道健行",
+      "attendees": 9,
+      "note": null,
+      "isCancelled": false
+    },
+    {
+      "sequenceNumber": 42,
+      "rawDateLabel": "95年6月24~25日",
+      "year": 95,
+      "month": 6,
+      "location": "赫威神木群",
+      "attendees": 0,
+      "note": "因報名人數少於8人而取消",
+      "isCancelled": true
+    },
+    {
+      "sequenceNumber": 43,
+      "rawDateLabel": "95年9月23~24日",
+      "year": 95,
+      "month": 9,
+      "location": "茶壺山&金瓜石",
+      "attendees": 14,
+      "note": "召開會員大會暨正副會長改選",
+      "isCancelled": false
+    },
+    {
+      "sequenceNumber": 44,
+      "rawDateLabel": "95年12月30日~ 96年1月1日",
+      "year": 95,
+      "month": 12,
+      "location": "鎮西堡司馬庫斯神木群之旅",
+      "attendees": 23,
+      "note": "老師慶生活動、           OB十週年慶活動",
+      "isCancelled": false
+    }
+  ],
+  "sourceMarkdown": "# 遊記總集 — 前言\n\n長榮登山社校友會10周年紀念遊記總集\n\n## 指導老師的話\n\n回顧六年山中歲月與大家在一起，接近大自然、享受大自然所賜予的秀麗風光、怡人景緻，徜徉在綿延山巒、山川間，在叢林中追逐、享受綠草如茵，歡笑不斷以及走累了「轉彎」就到了，但是數不盡的「轉彎」，那種「被騙」的感覺真溫馨。是一段永難忘懷的時光。\n\n長榮大學登山社校友會會刊創刊之際，由衷表示慶賀之餘，盼望藉由這份社刊的出版，能永續的維持你、我、他之間山誼，並融合在校社員相互砥礪，發揮登山者的精神、包容心，共同打拼，開創充滿新希望的人生。\n\n\n\n## 活動年表\n\n| 序號  | 活動時間                | 活動地點             | 參加人數 | 備註                                     |\n| --- | ------------------- | ---------------- | ---- | -------------------------------------- |\n| 0   | 86年5月14日            | 成立長榮登社校友會  及組織章程 |      |                                        |\n| 1   | 87年5月23~24日         | 烏山               | 14   | 召開會員大會                                 |\n| 2   | 87年月~日              | 陽明山國家公園          |      |                                        |\n| 3   | 88年1月1~2日           | 石洞溫泉             | 17   | 老師慶生活動                                 |\n| 4   | 88年7月10~11日         | 八仙山              | 14   | 未登頂                                    |\n| 5   | 89年1月1~2日           | 彰化縣全國大會師         | 12   | 社團會訊創刊發行、老師慶生活動                        |\n| 6   | 89年4月22~23日         | 桶盤山 & 烏來山        | 8    |                                        |\n| 7   | 89年7月15日            | 陽明山迎新            | 12   | 迎新活動                                   |\n| 8   | 89年9月23~24日         | 加里山              | 15   | 第一、二屆正副會長交接典禮                          |\n| 9   | 89年12月31日~  90年1月1日 | 瑞太古道 & 達娜依谷      | 14   | 老師慶生活動                                 |\n| 10  | 90年4月28~29日         | 拔刀爾山、高腰山及美鹿山     | 20   |                                        |\n| 11  | 90年7月14日            | 魚路古道             | 13   |                                        |\n| 12  | 90年7月28~29日         | 大克山              | 0    | 因颱風取消                                  |\n| 13  | 90年10月13~14日        | 頭嵙山              | 9    | 原訂小錦屏溯溪活動因風災頻傳，為防意外，行程改為攀登頭嵙山，並召開會員大會。 |\n| 14  | 90年10月27~28日        | 台南鹿耳門            |      | 支援中華健行登山會活動。                           |\n| 15  | 90年12月22~23日        | 清境農場             | 8    |                                        |\n| 16  | 90年12月29~30日        |                  | 12   | 老師慶生活動                                 |\n| 17  | 91年4月13~14日         | 北插天山             | 9    | 未攻頂                                    |\n| 18  | 91年7月13~14日         | 陽明山東西大縱走         | 8    |                                        |\n| 19  | 91年10月26~27日        | 稍來山-鳶嘴山縱走        | 10   | 召開會員大會暨正副會長改選                          |\n| 20  | 91年12月28~29日        | 奮起湖大凍山           | 5    | 老師慶生活動                                 |\n| 21  | 92年4月12~13日         | 跑馬古道             | 12   | 第三、四屆正副會長交接典禮                          |\n| 22  | 92年7月26~27日         | 水社大山             | 0    | 因颱風取消                                  |\n| 23  | 92年9月27~28日         | 馬拉邦山             | 20   | 召開會員大會                                 |\n| 序號  | 活動時間                | 活動地點             | 參加人數 | 備註                                     |\n| 25  | 92年12月27~28日        | 關山越嶺古道           | 7    | 老師慶生活動                                 |\n| 26  | 93年3月13~14日         | 東卯山              | 15   |                                        |\n| 27  | 93年6月12~13日         | 草嶺古道             | 0    | 報名人數過少改為秋季活動                           |\n| 28  | 93年8月28~29日         | 梅峰農場自然生態體驗營      | 13   |                                        |\n| 29  | 93年10月9~10日         | 草嶺古道             | 11   | 召開會員大會暨正副會長改選                          |\n| 30  | 93年11月27~28日        | 觀霧之旅             | 0    | 因颱風造成道路不通而取消                           |\n| 31  | 94年1月 1~2日          | 關山嶺山+石洞溫泉        | 8    | 老師慶生活動                                 |\n| 32  | 94年3月20日            | 玉山開山儀式及活動        | 4    | 玉山國家公園管理處主辦                            |\n| 33  | 94年3月26~27日         | 北插天山             | 11   | 第四、五屆正副會長交接典禮                          |\n| 34  | 94年4月23~24日         | 東勢林場賞螢火蟲         | 14   | 額外活動                                   |\n| 35  | 94年5月21~22日         | 學弟妹畢旅之清境合歡之旅     | 6    | 學弟妹主辦                                  |\n| 36  | 94年7月9日             | 大雪山森林遊樂區之旅       | 19   | 迎新活動                                   |\n| 37  | 94年8月13~14日         | 北埔五指山            | 23   | 召開會員大會                                 |\n| 38  | 94年10月8~10日         | 雪山東主峰            | 16   |                                        |\n| 39  | 94年12月31~  95年1月1日  | 台東太麻里之旅          | 6    | 老師慶生活動                                 |\n| 40  | 95年1月13~15日         | 玉山淨山活動           | 3    | 玉山國家公園管理處主辦                            |\n| 41  | 95年3月11~12日         | 溪頭杉林溪步道健行        | 9    |                                        |\n| 42  | 95年6月24~25日         | 赫威神木群            | 0    | 因報名人數少於8人而取消                           |\n| 43  | 95年9月23~24日         | 茶壺山&金瓜石          | 14   | 召開會員大會暨正副會長改選                          |\n| 44  | 95年12月30日~  96年1月1日 | 鎮西堡司馬庫斯神木群之旅     | 23   | 老師慶生活動、           OB十週年慶活動             |\n\n## 編者的話\n\n## 作者的話\n\n## 照片集錦\n"
+}

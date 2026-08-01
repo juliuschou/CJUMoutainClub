@@ -1,0 +1,17 @@
+{
+  "sourceCounts": {
+    "markdownFiles": 39,
+    "storyFiles": 37,
+    "activityRows": 44,
+    "timelineNodes": 45,
+    "mediaFiles": 248,
+    "jpegFiles": 239,
+    "pngFiles": 8,
+    "wmfFiles": 1,
+    "cancelledActivities": 5,
+    "storiesWithoutImages": 7
+  },
+  "warnings": [
+    "序號 24 不在原始活動年表中，已依現存遊記補入時間軸。"
+  ]
+}
