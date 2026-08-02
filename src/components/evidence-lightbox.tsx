@@ -60,6 +60,7 @@ export function EvidenceLightbox({ evidence, currentIndex, onChange, onClose }: 
     <dialog
       ref={dialogRef}
       aria-label={`${current.altText}，照片檢視器`}
+      aria-modal="true"
       className="lightbox"
       onCancel={(event) => {
         event.preventDefault();

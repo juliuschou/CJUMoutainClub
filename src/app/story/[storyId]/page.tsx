@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { StoryInteractive } from "@/components/story/story-interactive";
 import { StoryMarkdown } from "@/components/story/story-markdown";
 import { toLightboxPhotos } from "@/lib/evidence";
+import { ROUTES, getStoryHref } from "@/lib/routes";
 import { getStory, stories } from "@/lib/stories";
 
 type StoryPageProps = {
@@ -32,10 +33,12 @@ export default async function StoryPage({ params }: StoryPageProps) {
   if (!story) notFound();
   const previousStory = story.prevStoryId ? getStory(story.prevStoryId) : null;
   const nextStory = story.nextStoryId ? getStory(story.nextStoryId) : null;
+  const previousHref = previousStory ? getStoryHref(previousStory.storyId) : null;
+  const nextHref = nextStory ? getStoryHref(nextStory.storyId) : null;
 
   return (
     <div className="content-shell story-page">
-      <Link className="back-link" href="/timeline">← 返回時間軸</Link>
+      <Link className="back-link" href={ROUTES.timeline}>← 返回時間軸</Link>
       <header className="story-header">
         <p className="eyebrow">序號 {story.sequenceNumber} · {story.fullDateLabel} · 西元 {story.westernYear}</p>
         <h1>{story.title}</h1>
@@ -61,14 +64,14 @@ export default async function StoryPage({ params }: StoryPageProps) {
       </StoryInteractive>
 
       <nav className="story-pagination" aria-label="前後故事">
-        {previousStory ? (
-          <Link href={`/story/${previousStory.storyId}`}>
-            <span>← 上一篇</span><strong>{previousStory.title}</strong>
+        {previousHref ? (
+          <Link href={previousHref}>
+            <span>← 上一篇</span><strong>{previousStory?.title}</strong>
           </Link>
         ) : <span />}
-        {nextStory ? (
-          <Link href={`/story/${nextStory.storyId}`}>
-            <span>下一篇 →</span><strong>{nextStory.title}</strong>
+        {nextHref ? (
+          <Link href={nextHref}>
+            <span>下一篇 →</span><strong>{nextStory?.title}</strong>
           </Link>
         ) : <span />}
       </nav>

@@ -3,12 +3,13 @@ import Link from "next/link";
 import { ArchiveStats } from "@/components/archive-stats";
 import { FEATURED_STORY_ID } from "@/content/site";
 import { manifest } from "@/lib/manifest";
+import { ROUTES } from "@/lib/routes";
 import { getStory } from "@/lib/stories";
 
 const featureLinks = [
-  { href: "/preface", title: "前言與活動年表", description: "從指導老師的話與原始年表，理解這份典藏如何開始。" },
-  { href: "/afterword", title: "後記與出版資訊", description: "重讀共同打造記憶寶庫鑰匙的初衷，以及參與出版的夥伴。" },
-  { href: "/about", title: "關於時間證據卡", description: "了解網站如何以時間、故事與照片三層結構整理山行記憶。" },
+  { href: ROUTES.preface, title: "前言與活動年表", description: "從指導老師的話與原始年表，理解這份典藏如何開始。" },
+  { href: ROUTES.afterword, title: "後記與出版資訊", description: "重讀共同打造記憶寶庫鑰匙的初衷，以及參與出版的夥伴。" },
+  { href: ROUTES.about, title: "關於時間證據卡", description: "了解網站如何以時間、故事與照片三層結構整理山行記憶。" },
 ] as const;
 
 export default function HomePage() {
@@ -35,8 +36,8 @@ export default function HomePage() {
           <h1>長榮登山社校友會<br />10 週年遊記</h1>
           <p>沿著時間，走進每一段山行故事。</p>
           <div className="landing-hero__actions">
-            <Link className="button button--primary" href="/timeline">進入時間軸 →</Link>
-            <Link className="button landing-hero__secondary" href="/preface">閱讀前言</Link>
+            <Link className="button button--primary" href={ROUTES.timeline}>進入時間軸 →</Link>
+            <Link className="button landing-hero__secondary" href={ROUTES.preface}>閱讀前言</Link>
           </div>
         </div>
       </section>
