@@ -24,7 +24,8 @@
 - **語言：** [TypeScript](https://www.typescriptlang.org/)
 - **樣式：** [Tailwind CSS](https://tailwindcss.com/) 4
 - **內容處理：** [remark](https://github.com/remarkjs/remark) / [unified](https://github.com/unifiedjs/unified) + [sharp](https://sharp.pixelplumbing.com/) 圖片處理
-- **測試：** [Vitest](https://vitest.dev/) + Testing Library + jsdom
+- **測試：** [Vitest](https://vitest.dev/) + Testing Library + jsdom；[Playwright](https://playwright.dev/) 響應式與連結驗收
+- **CI：** GitHub Actions（內容檢查、型別、Lint、測試、靜態連結與瀏覽器驗證）
 - **輸出：** 純靜態匯出（`output: "export"`），可直接放在任何靜態主機上。
 
 ## 資料來源
@@ -77,6 +78,8 @@ docs/stories/
 ├── public/media/            # 建構期產生的 WebP 圖片（勿手動編輯）
 ├── tests/                   # Vitest 測試
 ├── tasks/                   # 工作紀錄與教訓筆記
+├── .github/workflows/       # GitHub Actions 驗證流程
+├── playwright.config.ts     # 瀏覽器驗收設定
 └── next.config.ts
 ```
 
@@ -119,6 +122,9 @@ npm run preview    # 以靜態伺服器預覽 out/（http://127.0.0.1:4173）
 | `npm run lint` | ESLint 檢查 |
 | `npm run test` | 執行 Vitest 測試一次 |
 | `npm run test:watch` | 監看模式執行測試 |
+| `npm run check:links` | 掃描 `out/` 的 HTML、圖片與故事連結 |
+| `npm run test:e2e` | 執行 Playwright 響應式與連結驗收 |
+| `npm run verify:export` | 建構靜態網站並執行連結檢查 |
 | `npm run deploy` | 重新建構並部署至 Cloudflare Pages |
 
 ## 路由總覽
@@ -134,12 +140,38 @@ npm run preview    # 以靜態伺服器預覽 out/（http://127.0.0.1:4173）
 
 故事卡的 `storyId` 為 ASCII slug（如 `94-07-daxueshan-orientation`），對應 `src/content/story-map.ts` 中的映射。
 
+## 響應式與互動
+
+- **手機／平板（< 1024px）：** 使用垂直時間軸，頁首品牌列與導覽列可換列，導覽項目保留至少 44px 觸控區。
+- **桌面（≥ 1024px）：** 使用可水平滾動、觸控板與拖曳的時間軸；頁面本身不會因時間軸內容而產生水平捲動。
+- **故事節點：** 有遊記的節點整張卡片是單一原生連結；取消或沒有遊記的活動則維持非互動狀態。
+- **鍵盤與無障礙：** 導覽提供目前頁面狀態，故事卡可用鍵盤操作，照片 Lightbox 支援 Escape、方向鍵、焦點管理與焦點還原。
+
 ## 測試
 
-涵蓋內容建構邏輯、Markdown 呈現、時間軸互動與 Lightbox 無障礙行為：
+單元與元件測試涵蓋內容建構、Markdown 呈現、時間軸互動、導覽與 Lightbox 無障礙行為：
 
 ```bash
 npm run test
+```
+
+執行瀏覽器驗收前，先安裝 Playwright Chromium：
+
+```bash
+npx playwright install chromium
+npm run test:e2e
+```
+
+完整的靜態輸出驗證可依序執行：
+
+```bash
+npm run content:check
+npm run typecheck
+npm run lint
+npm test
+npm run build
+npm run check:links
+npm run test:e2e
 ```
 
 ## 部署
@@ -170,6 +202,17 @@ npm run deploy
 ### 其他靜態主機
 
 `out/` 目錄為標準靜態檔案，亦可部署至 GitHub Pages、Netlify、Vercel 或任何靜態檔案伺服器。
+
+## CI 驗證
+
+`.github/workflows/verify.yml` 會在推送至 `main` 或建立 Pull Request 時執行：
+
+1. 安裝 Node.js、Playwright Chromium 與 ImageMagick。
+2. 執行 `content:check`、型別檢查、Lint 與 Vitest。
+3. 建構靜態輸出並執行 `check:links`。
+4. 以 Playwright 驗證不同視窗尺寸下的響應式版面、導覽 active state、故事連結與 404 行為。
+
+若要在本機重現 CI 的主要檢查，可直接執行上方「測試」章節的完整驗證指令。正式部署至 Cloudflare Pages 不屬於 CI 自動流程，需另外執行 `npm run deploy`。
 
 ## 授權
 
