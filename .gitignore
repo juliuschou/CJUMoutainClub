@@ -6,3 +6,8 @@ coverage/
 *.tsbuildinfo
 .DS_Store
 public/media/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/tests/__fixtures__/

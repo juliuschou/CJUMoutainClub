@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArchiveStats } from "@/components/archive-stats";
 import { PageHeader } from "@/components/page-header";
 import { manifest } from "@/lib/manifest";
+import { ROUTES } from "@/lib/routes";
 
 export const metadata: Metadata = {
   title: "關於本站",
@@ -46,7 +47,7 @@ export default function AboutPage() {
       <section className="technology-note card">
         <h2>技術方式</h2>
         <p>Next.js App Router + TypeScript + Tailwind CSS。內容與圖片在建構期解析、轉為 route-safe WebP 與結構化 JSON，再以靜態匯出部署。互動只保留在時間軸與 Lightbox，以降低瀏覽器負擔。</p>
-        <Link className="button button--primary" href="/timeline">開始閱讀時間軸</Link>
+        <Link className="button button--primary" href={ROUTES.timeline}>開始閱讀時間軸</Link>
       </section>
     </section>
   );

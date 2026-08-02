@@ -64,18 +64,60 @@ const nodes: TimelineNode[] = [
 ];
 
 describe("TimelineExplorer", () => {
-  it("updates the evidence card from keyboard-operable node buttons", () => {
+  it("renders story nodes as a single Link whose whole card is one hit area", () => {
     render(<TimelineExplorer nodes={nodes} />);
-    fireEvent.click(screen.getByRole("button", { name: /頭嵙山/ }));
+    // The story node is a link whose accessible name covers date, title and photo count.
+    const storyLink = screen.getByRole("link", { name: /頭嵙山/ });
+    expect(storyLink).toHaveAttribute("href", "/story/story");
+    // Date and photo count live inside the same anchor (same hit area).
+    expect(storyLink).toHaveTextContent("10月");
+    expect(storyLink).toHaveTextContent("3 張照片");
+    // No nested interactive elements inside the link.
+    expect(storyLink.querySelector("button, a")).toBeNull();
+  });
+
+  it("initially selects the first valid story and shows its preview", () => {
+    render(<TimelineExplorer nodes={nodes} />);
+    // First valid story is 頭嵙山 (founding has no story).
     expect(screen.getByRole("heading", { name: "頭嵙山" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "閱讀完整故事" })).toHaveAttribute("href", "/story/story");
   });
 
-  it("shows cancellation reason without creating a story link", () => {
+  it("updates the preview on focus of a story card", () => {
     render(<TimelineExplorer nodes={nodes} />);
-    fireEvent.click(screen.getByRole("button", { name: /大克山/ }));
-    expect(screen.getAllByText("因颱風取消")).toHaveLength(2);
-    expect(screen.queryByRole("link", { name: "閱讀完整故事" })).not.toBeInTheDocument();
-    expect(screen.getByText("原始典藏未附遊記全文")).toBeInTheDocument();
+    const storyLink = screen.getByRole("link", { name: /頭嵙山/ });
+    fireEvent.focus(storyLink);
+    // Selected marker exposed as non-color cue.
+    expect(storyLink.getAttribute("data-selected")).toBe("");
+    expect(screen.getByText("目前預覽")).toBeInTheDocument();
+  });
+
+  it("does not create a link for cancelled or no-story nodes", () => {
+    render(<TimelineExplorer nodes={nodes} />);
+    // No-story founding node has no anchor.
+    expect(screen.queryByRole("link", { name: /成立校友會/ })).not.toBeInTheDocument();
+    // Cancelled node has no anchor and shows its reason.
+    expect(screen.queryByRole("link", { name: /大克山/ })).not.toBeInTheDocument();
+    expect(screen.getByText("因颱風取消")).toBeInTheDocument();
+  });
+
+  it("never produces an undefined story route", () => {
+    const { container } = render(<TimelineExplorer nodes={nodes} />);
+    expect(container.querySelector('a[href="/story/undefined/"]')).toBeNull();
+    expect(container.querySelector('a[href="/story/undefined"]')).toBeNull();
+  });
+
+  it("keeps year-jump and density controls keyboard-operable as buttons", () => {
+    render(<TimelineExplorer nodes={nodes} />);
+    expect(screen.getByRole("button", { name: /民國 86 年/ })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /民國 90 年/ })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /收合為全年總覽/ })).toBeInTheDocument();
+  });
+
+  it("does not mark story-card selection with aria-pressed", () => {
+    render(<TimelineExplorer nodes={nodes} />);
+    const storyLink = screen.getByRole("link", { name: /頭嵙山/ });
+    fireEvent.focus(storyLink);
+    expect(storyLink.getAttribute("aria-pressed")).toBeNull();
   });
 });

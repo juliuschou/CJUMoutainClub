@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHeader } from "@/components/page-header";
 import { preface } from "@/lib/preface";
+import { getStoryHref } from "@/lib/routes";
 import { timeline } from "@/lib/timeline";
 
 export const metadata: Metadata = {
@@ -43,12 +44,13 @@ export default function PrefacePage() {
               {preface.activities.map((activity) => {
                 const node = nodeBySequence.get(activity.sequenceNumber);
                 const location = activity.location || node?.title || "未記載";
+                const storyHref = node?.hasStory ? getStoryHref(node.storyId) : null;
                 return (
                   <tr className={activity.isCancelled ? "is-cancelled" : undefined} key={activity.sequenceNumber}>
                     <td>{activity.sequenceNumber}</td>
                     <td>{activity.rawDateLabel}</td>
                     <td>
-                      {node?.hasStory ? <Link href={`/story/${node.storyId}`}>{location}</Link> : location}
+                      {storyHref ? <Link href={storyHref}>{location}</Link> : location}
                     </td>
                     <td>{activity.attendees === null ? "—" : activity.attendees}</td>
                     <td>
@@ -64,14 +66,18 @@ export default function PrefacePage() {
         </div>
       </section>
 
-      {supplementalStories.map((story) => (
-        <aside className="card historical-gap" key={story.storyId}>
-          <p className="eyebrow">原表缺號補遺</p>
-          <h2>序號 {story.sequenceNumber} · {story.title}</h2>
-          <p>{story.note} 網站保留原表 {preface.activities.length} 筆的原貌，並將這篇現存遊記列為補遺節點。</p>
-          <Link className="button button--primary" href={`/story/${story.storyId}`}>閱讀補入故事</Link>
-        </aside>
-      ))}
+      {supplementalStories.map((story) => {
+        const storyHref = getStoryHref(story.storyId);
+        if (!storyHref) return null;
+        return (
+          <aside className="card historical-gap" key={story.storyId}>
+            <p className="eyebrow">原表缺號補遺</p>
+            <h2>序號 {story.sequenceNumber} · {story.title}</h2>
+            <p>{story.note} 網站保留原表 {preface.activities.length} 筆的原貌，並將這篇現存遊記列為補遺節點。</p>
+            <Link className="button button--primary" href={storyHref}>閱讀補入故事</Link>
+          </aside>
+        );
+      })}
 
       <section className="empty-source-sections" aria-labelledby="empty-source-title">
         <h2 id="empty-source-title">原書其他段落</h2>

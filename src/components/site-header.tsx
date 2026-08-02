@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { SITE_NAVIGATION } from "@/content/site";
+import { SiteNav } from "@/components/site-nav";
 
 export function SiteHeader() {
   return (
@@ -12,15 +12,7 @@ export function SiteHeader() {
             <small>10 週年遊記典藏</small>
           </span>
         </Link>
-        <nav aria-label="主要導覽">
-          <ul className="site-nav">
-            {SITE_NAVIGATION.map((item) => (
-              <li key={item.href}>
-                <Link href={item.href}>{item.label}</Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <SiteNav />
       </div>
     </header>
   );

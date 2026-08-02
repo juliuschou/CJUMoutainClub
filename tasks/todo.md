@@ -97,7 +97,7 @@
 - Node.js v26.5.1、npm 11.17.0。
 - Next.js 16.2.12（執行時可取得的最新穩定版）、React 19、Tailwind CSS 4。
 - `react-markdown`、`remark-gfm`、`unified`、`remark-parse`。
-- `sharp` 0.35.3；legacy WMF 由 ImageMagick `magick` 轉檔。
+- `sharp` 0.35.3；legacy WMF 由 ImageMagick `magick` 轉檔，缺少時支援 `convert`；CI 先安裝 ImageMagick 系統套件。
 - Vitest + Testing Library。
 - npm production audit：0 vulnerabilities。
 
@@ -154,3 +154,103 @@
 - [x] 建立 `.claude/skills/mountain-club-site-workflow` 專案 symlink。
 - [x] 保持 `skills-lock.json` 不變；本 skill 為 project-authored，不偽裝成 remote-installed skill。
 - [x] 記錄來源 provenance、explicit mapping、override、generated-output 與 conditional browser verification 邊界。
+
+## 2026-08-02 Responsive Layout & Link Correction
+
+### Goal and acceptance criteria
+
+依 `docs/長榮登山社網站_響應式版面與連結修正實作計畫.md` 修正 768–1023px 仍用橫向時間軸、320px 頁首擁擠、導覽缺少 active state、時間軸卡片看似可點擊但只更新預覽等問題。保留單一時間軸資料／DOM、既有 `docs/stories/` 來源、顯式 story mapping、WebP 建構流程與 Next.js static export。
+
+- [x] `<1024px` 垂直時間軸；`>=1024px` 可辨識可滾輪／觸控板／拖曳的橫向時間軸。
+- [x] 320–1920px 無整頁水平捲動；只有桌面時間軸及表格容器自行承接水平 overflow。
+- [x] 行動／平板頁首為可換列品牌列＋導覽列；副標題在可用空間保留；導覽觸控區 ≥44px。
+- [x] Header 固定路由 `/timeline/`、`/preface/`、`/afterword/`、`/about/`，目前頁可見 active state 與 `aria-current="page"`。
+- [x] 有效故事節點整張卡片為單一 Next `<Link>` href `/story/${storyId}/`；無故事／取消／無效 ID 不建立連結，無巢狀互動元素或 `/story/undefined/`。
+- [x] 桌面保留下方預覽：hover／focus 更新選取預覽；原生 Link 點擊導頁。初始預覽選第一個有效故事。
+- [x] 37 個故事由 `generateStaticParams()` 匯出成 `out/story/{storyId}/index.html`。
+- [x] 既有來源與生成規模不變：39 Markdown、37 stories、44 activity rows、45 timeline nodes、248 media。
+
+### Checklist
+
+- [x] Checkpoint A — 分支與基線：`git switch -c fix/responsive-timeline-links`；基線 content:check/typecheck/lint/test。
+- [x] Checkpoint B — Route 與 active state：`src/lib/routes.ts`、`src/components/site-nav.tsx`、`src/content/site.ts` trailing slash、Header active state、測試。
+- [x] Checkpoint C — Timeline 卡片語意：單一 Link 卡片、無故事非互動、selected 非色彩提示、wheel/drag、初始選第一個有效故事、測試。
+- [x] Checkpoint D — 1024 breakpoint (globals.css)：Mobile First、CSS custom properties、44px 觸控、scroll-padding、不溢出。
+- [x] Checkpoint E — Lightbox 與 story route a11y：modal 語意、測試強化、story route 測試。
+- [x] Checkpoint F — Static export link checker：`scripts/check-static-links.ts`、純函式測試、package.json scripts。
+- [x] Checkpoint G — Playwright 響應式與連結驗收：`playwright.config.ts`、`tests/e2e/responsive-links.spec.ts`、10 viewport。
+- [x] Checkpoint H — CI：`.github/workflows/verify.yml`。
+- [x] Checkpoint I — 完整驗證並記錄 observed output。
+
+### Risk & Rollback
+
+- **Risk level:** Medium — 影響 Header route awareness、timeline 互動語意、1024 breakpoint、瀏覽器測試與 CI；不影響史料與資料 mapping。
+- **Affected components:** `src/lib/routes.ts`、`src/components/site-nav.tsx`、`src/components/site-header.tsx`、`src/content/site.ts`、`src/components/timeline/timeline-explorer.tsx`、`src/app/globals.css`、`src/components/evidence-lightbox.tsx`、`src/app/story/[storyId]/page.tsx`、新增 checker/Playwright/CI、package.json。
+- **Rollback:** 按 checkpoint 回復 UI/CSS、checker、Playwright/CI 檔案；不碰 `docs/stories/`、story map、overrides、生成媒體。
+- **Deployment:** 不修改 Cloudflare 專案、credentials 或 `npm run deploy`；正式部署需另行明確批准。
+
+### Dependencies & Environment
+
+- Node.js v26.5.1、npm 11.17.0、Next.js 16.2.12、React 19、Tailwind 4。
+- `@playwright/test` ^1.62.1（Chromium）。`next-dev-loop` 不適用（需 Next 16.3+）。
+- `trailingSlash: true`、`output: export`、`typedRoutes: true`。
+
+### Working Notes
+
+- 基線（修改前）：content:check ✓（45 nodes/37 stories/248 media）、typecheck ✓、lint ✓、`npm test` 4 files/12 tests ✓。
+- Story ID 不變式：`/^[a-z0-9-]+$/`（build-content.ts L504）。
+- `typedRoutes: true`：href 需符合 typed route，`/story/[storyId]` 動態路由需以 template literal 帶變數，不可用 string 變數直接當 href；route helper 回傳 `string` 配合 `as const`／`href` 屬性。
+- 既有內部 Link href 多為無尾斜線（`/timeline`、`/story/${id}`）；需統一為尾端斜線以對齊 `trailingSlash: true` 靜態輸出。
+- 時間軸目前 `<button>` 選取 → 改為故事節點單一 `<Link>`，無故事節點非互動卡片；預覽由 hover/focus 更新。
+- Lightbox 已有 showModal/Escape/方向鍵/Tab loop；待補 `aria-modal`、邊界斷言與關閉後焦點還原斷言。
+
+### Results
+
+完整驗證（2026-08-02）：
+
+- `npm run content:check` → Validated 45 timeline nodes, 37 stories, and 248 media references. ✓
+- `npm run typecheck` → passed（`tsc --noEmit` 無輸出）。✓
+- `npm run lint` → passed（`eslint .` 無輸出）。✓
+- `npm test`（Vitest）→ 9 files / 48 tests passed。✓
+- `npm run build` → static export 44 pages（含 37 story routes）。✓
+- `npm run check:links` → OK — scanned 45 HTML files, no broken links。✓
+- `npm run test:e2e`（Playwright Chromium）→ 55 passed（10 viewports × 5 測試 + 5 cross-viewport 測試）。✓
+- `git diff --check` → OK（無 whitespace 錯誤）。✓
+- `find out/story -mindepth 2 -maxdepth 2 -name index.html | wc -l` → 37。✓
+- `git diff -- docs/stories src/content/story-map.ts src/content/overrides.ts` → 無差異。✓
+- `src/generated/manifest.json` → 39/37/44/45/248 不變。✓
+- 本機 `npm run preview` HTTP smoke：`/`、`/timeline/`、`/preface/`、`/afterword/`、`/about/`、`/story/87-05-wushan/`、`/story/95-09-teapot-mountain/` 全 200；代表性 WebP `01-full.webp` 200（`image/webp`）；真實故事頁 200；未知 ID 與 `/story/undefined/` 404（`dynamicParams=false` + `notFound()`）。✓
+- Cloudflare Pages 驗證：**未驗證**——未部署（正式部署為 outward-facing 動作，需另行明確批准）。部署後可執行 `BASE_URL=<Cloudflare Pages URL> npm run test:e2e` 重跑 smoke 並記錄於此。
+
+關鍵設計決定：
+
+- **Source href 維持無尾端斜線**以滿足 `typedRoutes: true`（typed static routes 為 `/about`、`/timeline`；動態為 `/story/${SafeSlug<T>}`）。`next.config.ts` 的 `trailingSlash: true` 在靜態匯出將之改寫為 `/timeline/`、`/story/{id}/`，已驗證輸出 HTML 含尾端斜線。`getStoryHref` 回傳 `` `/story/${string}` | null `` 型別讓呼叫端免 cast 又必須 null-guard，從根本杜絕 `/story/undefined/`。
+- **Timeline 單一 DOM**：同一份 `<section><ol><li>` 跨所有 breakpoint；`<1024px` 垂直（base CSS），`>=1024px` 橫向（`@media (min-width: 1024px)`）。移除舊 760px 才切垂直的落差。
+- **故事節點整張卡片為單一 `<Link>`**：日期、標題、照片數量、「閱讀故事 →」提示同一 hit area；hover/focus 更新 selected preview；原生 click/Enter 導頁。無故事／取消／無效 ID 為非互動 `<div>`，無 href、無 tab order、無假 cursor。selected 狀態以 `data-selected`、邊框、陰影、「目前預覽」文字多重非色彩提示。
+- **Header active state**：`usePathname()` 隔離於 `site-nav.tsx` client component；尾端斜線正規化後 exact match；`aria-current="page"`；故事頁不誤標。已在 `/timeline/`、`/preface/`、`/about/`、`/afterword/`、首頁、故事頁驗證。
+- **桌面 wheel/drag**：track 內 `wheel` 將垂直 delta 轉橫向捲動（不 hijack 橫向 delta，trackpad 仍原生）；pointer drag 以 6px threshold + click capture 避免拖曳後誤觸 Link；page 不隨 track 變寬。
+- **Link checker**：純函式 `classifyUrl`/`invalidStoryRoute`/`resolveTarget`/`extractHrefs`/`extractSrcs`/`extractSrcset` + CLI（`CHECK_LINKS_OUT` 可指向 fixture），拒絕 `/story/undefined/`、空 segment、traversal；14 單元測試 + CLI negative test 確認 non-zero exit。
+- **CI**：`.github/workflows/verify.yml` 跑 `npm ci` → content:check → typecheck → lint → vitest → build → check:links → Playwright（Chromium），broken link 可實際阻擋 CI；不碰 Cloudflare/credentials/deploy。
+
+## 2026-08-02 Fix ImageMagick CI Dependency
+
+### Goal and acceptance criteria
+
+- [x] GitHub Actions 在 content check 前安裝並驗證 ImageMagick。
+- [x] WMF 建構優先使用 `magick`，缺少時支援 `convert`，兩者皆缺少時顯示可操作錯誤。
+- [x] 來源故事、mapping、generated manifest 與衍生媒體規模不變。
+
+### Working Notes
+
+- CI 原因：全新 runner 沒有 `magick`，而 `content:check` 仍會 rasterize 唯一的 WMF。
+- 受影響來源：`docs/stories/90年/04月/拔刀爾山/images/image25.wmf`；本機與 CI 的 `.next/content-cache` 狀態可能不同。
+
+### Results
+
+- `npx vitest run tests/scripts/build-content.test.ts` → 1 file / 3 tests passed。
+- `npm run content:check` → validated 45 timeline nodes, 37 stories and 248 media references。
+- `npm run typecheck`、`npm run lint` → passed。
+- `npm test` → 10 files / 51 tests passed。
+- `npm run build` → static export 44 pages；`npm run check:links` → 45 HTML files，無 broken links。
+- `npm run test:e2e` → 55 passed。
+- `src/generated/manifest.json` 維持 39/37/44/45/248，WMF `image25.wmf` 維持 513×346 WebP；未修改來源故事、mapping 或 generated content。

@@ -85,7 +85,7 @@ docs/stories/
 ### 環境需求
 
 - **Node.js ≥ 20.9.0**
-- 處理 WMF 圖片時需系統已安裝 [ImageMagick](https://imagemagick.org/)（`magick` 指令）。
+- 處理 WMF 圖片時需系統已安裝 [ImageMagick](https://imagemagick.org/)；建構流程優先使用 ImageMagick 7 的 `magick`，並支援 ImageMagick 6 的 `convert`。Ubuntu CI 會在驗證前安裝此系統套件。
 
 ### 安裝
 
