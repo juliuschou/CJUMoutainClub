@@ -119,6 +119,7 @@ npm run preview    # 以靜態伺服器預覽 out/（http://127.0.0.1:4173）
 | `npm run lint` | ESLint 檢查 |
 | `npm run test` | 執行 Vitest 測試一次 |
 | `npm run test:watch` | 監看模式執行測試 |
+| `npm run deploy` | 重新建構並部署至 Cloudflare Pages |
 
 ## 路由總覽
 
@@ -143,7 +144,32 @@ npm run test
 
 ## 部署
 
-本專案設定為純靜態匯出（`output: "export"`，`trailingSlash: true`，圖片未最佳化），建構後 `out/` 目錄可直接部署至 GitHub Pages、Netlify、Vercel 靜態主機或任何靜態檔案伺服器。圖片已於建構期轉為 WebP，無需伺服器端圖片處理。
+本專案設定為純靜態匯出（`output: "export"`，`trailingSlash: true`，圖片未最佳化），建構後 `out/` 目錄可直接部署至任何靜態檔案伺服器。圖片已於建構期轉為 WebP，無需伺服器端圖片處理。
+
+### Cloudflare Pages（預設）
+
+本專案已設定 `npm run deploy`，會重新建構後以 [Wrangler](https://developers.cloudflare.com/pages/functions/wrangler-cli/) 上傳 `out/` 至 Cloudflare Pages 專案 `cjuobhiking`，正式網址為 <https://cjuobhiking.pages.dev/>。
+
+首次部署前需完成以下準備：
+
+1. 安裝相依套件（已含 `wrangler` devDependency）：`npm install`
+2. 登入 Cloudflare 帳號（瀏覽器授權一次即可）：`npx wrangler login`
+3. 建立 Pages 專案（僅首次需要）：
+   ```bash
+   npx wrangler pages project create cjuobhiking --production-branch=main
+   ```
+
+之後每次更新內容，只需一行即可重新建構並部署：
+
+```bash
+npm run deploy
+```
+
+> 上述指令等同於 `npm run build && wrangler pages deploy out --project-name=cjuobhiking --branch=main --commit-dirty=true`。
+
+### 其他靜態主機
+
+`out/` 目錄為標準靜態檔案，亦可部署至 GitHub Pages、Netlify、Vercel 或任何靜態檔案伺服器。
 
 ## 授權
 
