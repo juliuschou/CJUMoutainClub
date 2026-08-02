@@ -10,6 +10,7 @@
     "dev": "npm run content:build && next dev --turbopack",
     "build": "npm run content:clean && next build",
     "preview": "python3 -m http.server 4173 --bind 127.0.0.1 --directory out",
+    "deploy": "npm run build && wrangler pages deploy out --project-name=cjuobhiking --branch=main --commit-dirty=true",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "test": "vitest run",
@@ -39,7 +40,8 @@
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
     "unified": "^11.0.5",
-    "vitest": "^4.0.15"
+    "vitest": "^4.0.15",
+    "wrangler": "^4.118.0"
   },
   "overrides": {
     "postcss": "8.5.25",
