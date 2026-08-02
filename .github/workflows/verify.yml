@@ -30,6 +30,19 @@ jobs:
       - name: Install Playwright Chromium
         run: npx playwright install --with-deps chromium
 
+      - name: Install ImageMagick
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y imagemagick
+          if command -v magick >/dev/null 2>&1; then
+            magick -version
+          elif command -v convert >/dev/null 2>&1; then
+            convert -version
+          else
+            echo "No ImageMagick executable found" >&2
+            exit 1
+          fi
+
       - name: Content check
         run: npm run content:check
 

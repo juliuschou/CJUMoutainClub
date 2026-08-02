@@ -52,7 +52,7 @@ npm run build           # content:clean + Next.js static export
 5. 用 paragraph blocks 取得摘要；作者採保守解析加 verified overrides。
 6. 逐一驗證媒體存在，並對 canonical stories/story/images/file 路徑做 containment 檢查，拒絕 `..`、absolute path 與 symlink escape。
 7. 依 Markdown occurrence 建立 evidence；不得依 `imageN` 數字排序。
-8. 以 ImageMagick 將 WMF rasterize，再以 Sharp 產生 thumb/display/full WebP。
+8. 以 ImageMagick 將 WMF rasterize（優先使用 `magick`，缺少時支援 `convert`），再以 Sharp 產生 thumb/display/full WebP。
 9. 將裝飾圖片保留為資產但排除於照片數量與 Lightbox。
 10. 產生 previous/next story navigation、timeline、preface、afterword 與 manifest。
 

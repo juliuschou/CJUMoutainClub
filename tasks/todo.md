@@ -97,7 +97,7 @@
 - Node.js v26.5.1、npm 11.17.0。
 - Next.js 16.2.12（執行時可取得的最新穩定版）、React 19、Tailwind CSS 4。
 - `react-markdown`、`remark-gfm`、`unified`、`remark-parse`。
-- `sharp` 0.35.3；legacy WMF 由 ImageMagick `magick` 轉檔。
+- `sharp` 0.35.3；legacy WMF 由 ImageMagick `magick` 轉檔，缺少時支援 `convert`；CI 先安裝 ImageMagick 系統套件。
 - Vitest + Testing Library。
 - npm production audit：0 vulnerabilities。
 
@@ -231,3 +231,26 @@
 - **桌面 wheel/drag**：track 內 `wheel` 將垂直 delta 轉橫向捲動（不 hijack 橫向 delta，trackpad 仍原生）；pointer drag 以 6px threshold + click capture 避免拖曳後誤觸 Link；page 不隨 track 變寬。
 - **Link checker**：純函式 `classifyUrl`/`invalidStoryRoute`/`resolveTarget`/`extractHrefs`/`extractSrcs`/`extractSrcset` + CLI（`CHECK_LINKS_OUT` 可指向 fixture），拒絕 `/story/undefined/`、空 segment、traversal；14 單元測試 + CLI negative test 確認 non-zero exit。
 - **CI**：`.github/workflows/verify.yml` 跑 `npm ci` → content:check → typecheck → lint → vitest → build → check:links → Playwright（Chromium），broken link 可實際阻擋 CI；不碰 Cloudflare/credentials/deploy。
+
+## 2026-08-02 Fix ImageMagick CI Dependency
+
+### Goal and acceptance criteria
+
+- [x] GitHub Actions 在 content check 前安裝並驗證 ImageMagick。
+- [x] WMF 建構優先使用 `magick`，缺少時支援 `convert`，兩者皆缺少時顯示可操作錯誤。
+- [x] 來源故事、mapping、generated manifest 與衍生媒體規模不變。
+
+### Working Notes
+
+- CI 原因：全新 runner 沒有 `magick`，而 `content:check` 仍會 rasterize 唯一的 WMF。
+- 受影響來源：`docs/stories/90年/04月/拔刀爾山/images/image25.wmf`；本機與 CI 的 `.next/content-cache` 狀態可能不同。
+
+### Results
+
+- `npx vitest run tests/scripts/build-content.test.ts` → 1 file / 3 tests passed。
+- `npm run content:check` → validated 45 timeline nodes, 37 stories and 248 media references。
+- `npm run typecheck`、`npm run lint` → passed。
+- `npm test` → 10 files / 51 tests passed。
+- `npm run build` → static export 44 pages；`npm run check:links` → 45 HTML files，無 broken links。
+- `npm run test:e2e` → 55 passed。
+- `src/generated/manifest.json` 維持 39/37/44/45/248，WMF `image25.wmf` 維持 513×346 WebP；未修改來源故事、mapping 或 generated content。

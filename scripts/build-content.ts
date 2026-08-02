@@ -24,7 +24,9 @@ import type {
   TimelineNodeType,
 } from "../src/lib/types";
 
-const execFileAsync = promisify(execFile);
+type CommandRunner = (command: string, args: string[]) => Promise<unknown>;
+
+const execFileAsync = promisify(execFile) as CommandRunner;
 const PROJECT_ROOT = process.cwd();
 const STORIES_ROOT = path.join(PROJECT_ROOT, "docs", "stories");
 const PREFACE_PATH = path.join(STORIES_ROOT, "前言", "前言.md");
@@ -315,12 +317,38 @@ async function outputsAreFresh(sourcePath: string, outputPaths: string[]) {
   return outputStats.every((output) => output.mtimeMs >= sourceStats.mtimeMs);
 }
 
+function isMissingExecutable(error: unknown) {
+  return typeof error === "object" && error !== null && "code" in error && error.code === "ENOENT";
+}
+
+export async function convertWmf(
+  sourcePath: string,
+  outputPath: string,
+  runCommand: CommandRunner = execFileAsync,
+) {
+  try {
+    await runCommand("magick", [sourcePath, outputPath]);
+    return;
+  } catch (error) {
+    if (!isMissingExecutable(error)) throw error;
+  }
+
+  try {
+    await runCommand("convert", [sourcePath, outputPath]);
+  } catch (error) {
+    if (isMissingExecutable(error)) {
+      throw new Error("WMF conversion requires ImageMagick (`magick` or `convert`) to be installed and available on PATH.");
+    }
+    throw error;
+  }
+}
+
 async function rasterInput(sourcePath: string, evidenceId: string) {
   if (path.extname(sourcePath).toLowerCase() !== ".wmf") return sourcePath;
   await mkdir(CACHE_ROOT, { recursive: true });
   const outputPath = path.join(CACHE_ROOT, `${evidenceId}.png`);
   if (!(await outputsAreFresh(sourcePath, [outputPath]))) {
-    await execFileAsync("magick", [sourcePath, outputPath]);
+    await convertWmf(sourcePath, outputPath);
   }
   invariant(await pathExists(outputPath), `ImageMagick did not convert ${sourcePath}`);
   return outputPath;
